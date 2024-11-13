@@ -34,9 +34,9 @@ itensRouter.put('/itens/:id', (req, res) => {
     const id: number = +req.params.id
     itensRepository.atualizar(id, req.body, (notFound) => {
         if (notFound) {
-            res.status(404).send()
+            res.status(404).send('Item não encontrado')
         } else {
-            res.status(204).send()
+            res.status(204).send()  // Sem conteúdo
         }
     })
 })
@@ -45,7 +45,7 @@ itensRouter.delete('/itens/:id', (req, res) => {
     const id: number = +req.params.id
     itensRepository.apagar(id, (notFound) => {
         if (notFound) {
-            res.status(404).send()
+            res.status(404).send('Item não encontrado')
         } else {
             res.status(204).send()
         }

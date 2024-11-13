@@ -3,7 +3,7 @@ import database from './database'
 
 const itensRepository = {
     criar: (item: Item, callback: (id?: number) => void) => {
-        const sql = 'INSERT INTO itens (nome, descricao) VALUES (?, ?)'
+        const sql = 'INSERT INTO itens (nome) VALUES (?)'
         const params = [item.nome]
         database.run(sql, params, function(_err) {
             callback(this?.lastID)
@@ -27,10 +27,10 @@ const itensRepository = {
     },
 
     atualizar: (id: number, item: Item, callback: (notFound: boolean) => void) => {
-        const sql = 'UPDATE itens SET nome = ?, descricao = ? WHERE id = ?'
+        const sql = 'UPDATE itens SET nome = ? WHERE id = ?'
         const params = [item.nome, id]
         database.run(sql, params, function(_err) {
-            callback(this.changes === 0)
+            callback(this.changes === 0)    
         })
     },
 
